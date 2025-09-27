@@ -2,32 +2,18 @@
 
 import { useState, useEffect } from 'react';
 
-interface TxRef { 
-  network: 'mock' | 'local' | 'testnet'; 
-  idOrHash: string; 
-  timestamp: number;
-  encrypted?: boolean;
-}
-
-interface WalletData {
-  tokenBalance: number;
-  history: Array<{points: number; txRef: TxRef; metadata?: any}>;
-  encryptionStatus?: string;
-  userRole?: string;
-}
-
 export default function Home() {
-  const [walletData, setWalletData] = useState<WalletData | null>(null);
+  const [walletData, setWalletData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [minting, setMinting] = useState(false);
   const [userSecret, setUserSecret] = useState('');
-  const [demoUserId] = useState('demo@user');
+  const [encryptionEnabled, setEncryptionEnabled] = useState(false);
 
   const fetchWalletData = async () => {
-    console.log('🔄 Fetching wallet data...');
     try {
+      console.log('🔄 Fetching wallet data...');
       const headers: Record<string, string> = {
-        'X-Demo-User-Id': demoUserId
+        'X-Demo-User-Id': 'demo@user'
       };
       
       if (userSecret) {
@@ -54,7 +40,7 @@ export default function Home() {
       
       const headers: Record<string, string> = {
         'Content-Type': 'application/json',
-        'X-Demo-User-Id': demoUserId
+        'X-Demo-User-Id': 'demo@user'
       };
       
       if (userSecret) {
@@ -63,8 +49,8 @@ export default function Home() {
 
       const requestBody = {
         points: 50,
-        reason: 'demo-goal-completion'
-        // All transactions are now encrypted by default - no need to specify
+        reason: 'demo-goal-completion',
+        encrypt: encryptionEnabled
       };
       console.log('Sending mint request:', requestBody);
       
@@ -81,7 +67,7 @@ export default function Home() {
       if (!response.ok) throw new Error(`Failed to mint: ${mintResult.error}`);
       
       console.log('✅ Mint successful, refreshing wallet...');
-      await fetchWalletData(); // Refresh wallet data
+      await fetchWalletData();
     } catch (error) {
       console.error('❌ Failed to mint rewards:', error);
       alert(`Error: ${error instanceof Error ? error.message : 'Unknown error'}`);
@@ -92,9 +78,9 @@ export default function Home() {
 
   useEffect(() => {
     fetchWalletData();
-  }, [userSecret]); // Refetch when user secret changes
+  }, [userSecret]);
 
-  if (loading) {
+  if (loading && !walletData) {
     return (
       <main className="flex min-h-screen flex-col items-center justify-center p-24">
         <div className="text-xl">Loading wallet...</div>
@@ -130,15 +116,20 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="text-sm">
-              <span className="font-medium">🔒 Encryption: </span>
-              <span className="px-2 py-1 rounded text-xs bg-blue-100 text-blue-800">
-                All transactions encrypted with SHA256 machine-binding
-              </span>
+            <div className="mb-4">
+              <label className="flex items-center">
+                <input
+                  type="checkbox"
+                  checked={encryptionEnabled}
+                  onChange={(e) => setEncryptionEnabled(e.target.checked)}
+                  className="mr-2"
+                />
+                Enable encryption for new transactions
+              </label>
             </div>
 
             <div className="text-sm">
-              <span className="font-medium">Decryption Status: </span>
+              <span className="font-medium">Encryption Status: </span>
               <span className={`px-2 py-1 rounded text-xs ${
                 walletData?.encryptionStatus === 'decrypted' 
                   ? 'bg-green-100 text-green-800' 
@@ -165,10 +156,10 @@ export default function Home() {
             disabled={minting}
             className="bg-green-500 hover:bg-green-700 disabled:bg-gray-400 text-white font-bold py-3 px-6 rounded-lg transition-colors"
           >
-            {minting ? '⏳ Minting...' : '🎯 Complete Demo Goal (+50 Points) 🔒'}
+            {minting ? '⏳ Minting...' : `🎯 Complete Demo Goal (+50 Points) ${encryptionEnabled ? '🔒' : '🔓'}`}
           </button>
           <p className="text-sm mt-2 text-gray-600">
-            All transactions are machine-bound encrypted with SHA256
+            {encryptionEnabled ? 'Transaction will be encrypted' : 'Transaction will be unencrypted'}
           </p>
         </div>
 
@@ -176,20 +167,19 @@ export default function Home() {
           <div className="w-full">
             <h3 className="text-2xl font-semibold mb-4">🏆 Recent Rewards</h3>
             <div className="grid gap-4">
-              {walletData.history.map((item, index) => (
+              {walletData.history.map((item: any, index: number) => (
                 <div key={index} className="border border-gray-300 dark:border-gray-600 rounded-lg p-4 bg-gray-50 dark:bg-gray-800 shadow-sm">
                   <div className="flex justify-between items-start">
                     <div className="flex-1">
                       <div className="flex items-center mb-2">
                         <span className="font-semibold text-green-600 text-lg">+{item.points} Points</span>
-                        {item.txRef.encrypted && (
+                        {item.txRef?.encrypted && (
                           <span className="ml-2 px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs">
                             🔒 Encrypted
                           </span>
                         )}
                       </div>
                       
-                      {/* Metadata Display */}
                       {item.metadata && (
                         <div className="text-sm text-gray-600 mb-2">
                           {item.metadata.encrypted ? (
@@ -212,12 +202,12 @@ export default function Home() {
                     
                     <div className="text-sm text-gray-500 text-right">
                       <div className="flex items-center mb-1">
-                        <span className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">
+                        <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">
                           {item.txRef.network}
                         </span>
                       </div>
                       <div>{new Date(item.txRef.timestamp).toLocaleString()}</div>
-                      <div className="text-xs text-gray-400 mt-1 font-mono">
+                      <div className="text-xs text-gray-400 mt-1">
                         {item.txRef.idOrHash.substring(0, 16)}...
                       </div>
                     </div>
@@ -226,7 +216,7 @@ export default function Home() {
               ))}
             </div>
             
-            {userSecret === '' && walletData.history.some(item => item.txRef.encrypted) && (
+            {userSecret === '' && walletData.history.some((item: any) => item.txRef?.encrypted) && (
               <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-yellow-800 text-sm">
                   💡 <strong>Tip:</strong> Enter a user secret above to see full transaction details for encrypted records!
