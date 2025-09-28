@@ -8,7 +8,7 @@ export async function POST(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
     const userIdFromUrl = searchParams.get('userId')
-    
+
     let userId = userIdFromUrl
     if (!userId) {
       const body = await req.json()
