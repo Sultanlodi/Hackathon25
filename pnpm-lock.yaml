@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@google/generative-ai':
+    specifier: ^0.24.1
+    version: 0.24.1
   '@radix-ui/react-accordion':
     specifier: ^1.2.3
     version: 1.2.12(@types/react-dom@18.3.7)(@types/react@18.3.24)(react-dom@18.3.1)(react@18.3.1)
@@ -95,6 +98,9 @@ dependencies:
   cmdk:
     specifier: ^1.1.1
     version: 1.1.1(@types/react-dom@18.3.7)(@types/react@18.3.24)(react-dom@18.3.1)(react@18.3.1)
+  dayjs:
+    specifier: ^1.11.18
+    version: 1.11.18
   embla-carousel-react:
     specifier: ^8.6.0
     version: 8.6.0(react@18.3.1)
@@ -291,6 +297,11 @@ packages:
 
   /@floating-ui/utils@0.2.10:
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+    dev: false
+
+  /@google/generative-ai@0.24.1:
+    resolution: {integrity: sha512-MqO+MLfM6kjxcKoy0p1wRzG3b4ZZXtPI+z2IE26UogS2Cm/XHO+7gGRBh6gcJsOiIVoH93UwKvW4HdgiOZCy9Q==}
+    engines: {node: '>=18.0.0'}
     dev: false
 
   /@humanwhocodes/config-array@0.13.0:
@@ -2555,6 +2566,10 @@ packages:
 
   /date-fns@3.6.0:
     resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
+    dev: false
+
+  /dayjs@1.11.18:
+    resolution: {integrity: sha512-zFBQ7WFRvVRhKcWoUh+ZA1g2HVgUbsZm9sbddh8EC5iv93sui8DVVz1Npvz+r6meo9VKfa8NyLWBsQK1VvIKPA==}
     dev: false
 
   /debug@3.2.7:
