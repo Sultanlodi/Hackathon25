@@ -1,52 +1,100 @@
-import { NextResponse } from "next/server";
-// For demo we’ll store in memory (replace with DB in production)
-let accessToken: string | null = null;
+import { NextResponse } from 'next/server'
+import { setPlaidAccessToken, getBankConnections } from '@/lib/store'
+import { supabase } from '@/lib/supabase'
 
 // POST /api/bank/link
-// Expects { public_token } from Plaid Link frontend or curl
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const publicToken = body.public_token;
+    const body = await req.json()
+    const { public_token, user_id } = body
 
-    if (!publicToken) {
-      return NextResponse.json({ error: "Missing public_token" }, { status: 400 });
+    if (!public_token || !user_id) {
+      return NextResponse.json(
+        {
+          error: 'Missing public_token or user_id',
+        },
+        { status: 400 }
+      )
     }
 
-    // Exchange public_token for access_token
-    const resp = await fetch("https://sandbox.plaid.com/item/public_token/exchange", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        client_id: process.env.PLAID_CLIENT_ID,
-        secret: process.env.PLAID_SECRET,
-        public_token: publicToken,
-      }),
-    });
+    // Exchange public_token for access_token with Plaid
+    const exchangeResp = await fetch(
+      'https://sandbox.plaid.com/item/public_token/exchange',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          client_id: process.env.PLAID_CLIENT_ID,
+          secret: process.env.PLAID_SECRET,
+          public_token: public_token,
+        }),
+      }
+    )
 
-    const data = await resp.json();
+    const exchangeData = await exchangeResp.json()
 
-    if (data.error) {
-      return NextResponse.json({ error: data.error }, { status: 500 });
+    if (exchangeData.error) {
+      console.error('Plaid exchange error:', exchangeData.error)
+      return NextResponse.json(
+        {
+          error: exchangeData.error,
+        },
+        { status: 500 }
+      )
     }
 
-    // Save the access_token (for demo, in memory)
-    accessToken = data.access_token;
+    // Store the bank connection in Supabase
+    const connectionId = await setPlaidAccessToken(
+      user_id,
+      exchangeData.access_token,
+      exchangeData.item_id,
+      'Bank Institution'
+    )
 
     return NextResponse.json({
-      message: "Bank linked successfully",
-      item_id: data.item_id,
-    });
+      message: 'Bank linked successfully',
+      item_id: exchangeData.item_id,
+      connection_id: connectionId,
+    })
   } catch (err) {
-    console.error("Bank link error", err);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    console.error('Bank link error', err)
+    return NextResponse.json(
+      {
+        error: 'Server error',
+      },
+      { status: 500 }
+    )
   }
 }
 
-// GET /api/bank/link → just to check if stored
-export async function GET() {
-  return NextResponse.json({
-    linked: !!accessToken,
-    accessToken: accessToken ? "***stored***" : null,
-  });
+// GET /api/bank/link?user_id=xxx
+export async function GET(req: Request) {
+  try {
+    const { searchParams } = new URL(req.url)
+    const userId = searchParams.get('user_id')
+
+    if (!userId) {
+      return NextResponse.json(
+        {
+          error: 'Missing user_id parameter',
+        },
+        { status: 400 }
+      )
+    }
+
+    const connections = await getBankConnections(userId)
+
+    return NextResponse.json({
+      connected: connections.length > 0,
+      connections: connections,
+    })
+  } catch (error) {
+    console.error('Error fetching bank connections:', error)
+    return NextResponse.json(
+      {
+        error: 'Server error',
+      },
+      { status: 500 }
+    )
+  }
 }
