@@ -5,10 +5,15 @@ import { supabase } from '@/lib/supabase'
 // POST /api/bank/link
 export async function POST(req: Request) {
   try {
+    const { searchParams } = new URL(req.url)
+    const userId = searchParams.get('userId')
     const body = await req.json()
     const { public_token, user_id } = body
 
-    if (!public_token || !user_id) {
+    // Support both URL param and body param for user_id
+    const finalUserId = userId || user_id
+
+    if (!public_token || !finalUserId) {
       return NextResponse.json(
         {
           error: 'Missing public_token or user_id',
@@ -45,7 +50,7 @@ export async function POST(req: Request) {
 
     // Store the bank connection in Supabase
     const connectionId = await setPlaidAccessToken(
-      user_id,
+      finalUserId,
       exchangeData.access_token,
       exchangeData.item_id,
       'Bank Institution'
@@ -67,16 +72,16 @@ export async function POST(req: Request) {
   }
 }
 
-// GET /api/bank/link?user_id=xxx
+// GET /api/bank/link?user_id=xxx or ?userId=xxx
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
-    const userId = searchParams.get('user_id')
+    const userId = searchParams.get('user_id') || searchParams.get('userId')
 
     if (!userId) {
       return NextResponse.json(
         {
-          error: 'Missing user_id parameter',
+          error: 'Missing user_id or userId parameter',
         },
         { status: 400 }
       )

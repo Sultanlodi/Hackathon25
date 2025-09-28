@@ -1,5 +1,8 @@
 import { supabase } from './supabase'
 
+// Simple in-memory store as fallback for demo purposes
+const plaidTokens: Record<string, string> = {};
+
 // Store Plaid access tokens in Supabase bank_connections table
 export async function setPlaidAccessToken(
   userId: string,
@@ -8,6 +11,9 @@ export async function setPlaidAccessToken(
   institutionName?: string
 ) {
   try {
+    // Also store in memory for quick access
+    plaidTokens[userId] = token;
+
     const { data, error } = await supabase
       .from('bank_connections')
       .upsert(
@@ -58,6 +64,11 @@ export async function getPlaidAccessToken(
   itemId?: string
 ): Promise<string | null> {
   try {
+    // First check in-memory store for quick access
+    if (plaidTokens[userId]) {
+      return plaidTokens[userId];
+    }
+
     let query = supabase
       .from('bank_connections')
       .select('*')
@@ -86,6 +97,19 @@ export async function getPlaidAccessToken(
     console.error('Failed to retrieve Plaid access token:', error)
     return null
   }
+}
+
+// Compatibility functions for API branch
+export function saveAccessToken(userId: string, token: string) {
+  plaidTokens[userId] = token;
+}
+
+export function getAccessToken(userId: string): string | null {
+  return plaidTokens[userId] || null;
+}
+
+export function isLinked(userId: string): boolean {
+  return !!plaidTokens[userId];
 }
 
 // Helper functions for other database operations

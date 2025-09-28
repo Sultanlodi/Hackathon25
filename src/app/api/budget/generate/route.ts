@@ -3,10 +3,17 @@ import { NextResponse } from 'next/server'
 import { plaidClient } from '@/lib/plaidClient'
 import { getPlaidAccessToken } from '@/lib/store'
 
+// POST /api/budget/generate?userId=123 or { userId } in body
 export async function POST(req: Request) {
   try {
-    const body = await req.json()
-    const { userId } = body
+    const { searchParams } = new URL(req.url)
+    const userIdFromUrl = searchParams.get('userId')
+    
+    let userId = userIdFromUrl
+    if (!userId) {
+      const body = await req.json()
+      userId = body.userId
+    }
 
     if (!userId) {
       return NextResponse.json({ error: 'Missing userId' }, { status: 400 })

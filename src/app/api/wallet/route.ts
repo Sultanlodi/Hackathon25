@@ -4,6 +4,7 @@ import { sendEvent } from '@/lib/events' // import the broadcaster
 // In-memory wallets store
 let wallets: Record<string, { balance: number; history: any[] }> = {}
 
+// GET /api/wallet?userId=123
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url)
   const userId = searchParams.get('userId')
