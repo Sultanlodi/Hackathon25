@@ -1,11 +1,11 @@
-import { Inter } from 'next/font/google'
+// app/layout.tsx
+import type { Metadata } from 'next'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
 
-const inter = Inter({ subsets: ['latin'] })
-
-export const metadata = {
-  title: 'Hackathon25',
-  description: 'A Next.js project for Hackathon25',
+export const metadata: Metadata = {
+  title: 'Wealthly',
+  description: 'AI + on-chain rewards',
 }
 
 export default function RootLayout({
@@ -14,8 +14,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
