@@ -13,7 +13,9 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.58.0",
     "next": "14.0.4",
+    "plaid": "^38.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "uuid": "^13.0.0"

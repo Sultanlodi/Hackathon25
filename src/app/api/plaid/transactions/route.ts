@@ -19,16 +19,17 @@ export async function GET() {
   try {
     const response = await client.transactionsSync({
       access_token: process.env.PLAID_ACCESS_TOKEN!,
-      count: 10, // keep it small for now
+      count: 10,
     });
 
+    // Transform Plaid's massive JSON into clean objects
     const simplified = response.data.added.map((txn) => ({
       id: txn.transaction_id,
       name: txn.merchant_name || txn.name,
       amount: txn.amount,
       date: txn.date,
       category: txn.personal_finance_category?.primary,
-      logo: txn.logo_url || null,
+      logo: txn.logo_url || txn.personal_finance_category_icon_url || null,
     }));
 
     return NextResponse.json(simplified);
