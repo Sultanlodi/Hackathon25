@@ -1,37 +1,37 @@
-import { useState } from "react";
-import { 
-  Bell, 
-  Search, 
-  Wallet, 
+import { useState } from 'react'
+import {
+  Bell,
+  Search,
+  Wallet,
   ChevronDown,
   Settings,
   HelpCircle,
-  Zap
-} from "lucide-react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Badge } from "../ui/badge";
-import { 
+  Zap,
+} from 'lucide-react'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { Badge } from '../ui/badge'
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Card } from "../ui/card";
+} from '../ui/dropdown-menu'
+import { Card } from '../ui/card'
 
 interface TopBarProps {
-  onNavigate?: (page: string) => void;
+  onNavigate?: (page: string) => void
 }
 
 export function TopBar({ onNavigate }: TopBarProps) {
-  const [isWalletConnected, setIsWalletConnected] = useState(false);
-  const [walletAddress] = useState("0x1234...5678");
+  const [isWalletConnected, setIsWalletConnected] = useState(false)
+  const [walletAddress] = useState('0x1234...5678')
 
   const handleWalletConnect = () => {
-    setIsWalletConnected(!isWalletConnected);
-  };
+    setIsWalletConnected(!isWalletConnected)
+  }
 
   return (
     <header className="h-16 bg-background border-b border-border-subtle flex items-center justify-between px-6">
@@ -48,7 +48,9 @@ export function TopBar({ onNavigate }: TopBarProps) {
 
       {/* Center Section - Page Title */}
       <div className="flex-1 text-center">
-        <p className="text-sm text-foreground-subtle text-[16px] font-[SF_Pro]">Welcome back, John</p>
+        <p className="text-sm text-foreground-subtle text-[16px] font-[SF_Pro]">
+          Welcome back, John
+        </p>
       </div>
 
       {/* Right Section - Actions */}
@@ -56,10 +58,10 @@ export function TopBar({ onNavigate }: TopBarProps) {
         {/* Wallet Connect */}
         <Card variant="glass" className="px-3 py-2">
           <Button
-            variant={isWalletConnected ? "default" : "outline"}
+            variant={isWalletConnected ? 'default' : 'outline'}
             size="sm"
             onClick={handleWalletConnect}
-            className={isWalletConnected ? "primary-gradient" : ""}
+            className={isWalletConnected ? 'primary-gradient' : ''}
           >
             <Wallet className="w-4 h-4 mr-2" />
             {isWalletConnected ? (
@@ -70,7 +72,7 @@ export function TopBar({ onNavigate }: TopBarProps) {
                 </Badge>
               </span>
             ) : (
-              "Connect Wallet"
+              'Connect Wallet'
             )}
           </Button>
         </Card>
@@ -80,7 +82,10 @@ export function TopBar({ onNavigate }: TopBarProps) {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="relative">
               <Bell className="w-5 h-5" />
-              <Badge variant="error" className="absolute -top-1 -right-1 w-2 h-2 p-0 flex items-center justify-center">
+              <Badge
+                variant="error"
+                className="absolute -top-1 -right-1 w-2 h-2 p-0 flex items-center justify-center"
+              >
                 <span className="sr-only">3 notifications</span>
               </Badge>
             </Button>
@@ -88,14 +93,18 @@ export function TopBar({ onNavigate }: TopBarProps) {
           <DropdownMenuContent align="end" className="w-80">
             <DropdownMenuLabel className="flex items-center justify-between">
               Notifications
-              <Badge variant="secondary" className="text-xs">3</Badge>
+              <Badge variant="secondary" className="text-xs">
+                3
+              </Badge>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem className="flex items-start gap-3 p-3">
               <div className="w-2 h-2 rounded-full bg-success mt-2 shrink-0" />
               <div className="space-y-1">
                 <p className="text-sm font-medium">Goal Achievement!</p>
-                <p className="text-xs text-foreground-subtle">You've reached 75% of your emergency fund goal</p>
+                <p className="text-xs text-foreground-subtle">
+                  You've reached 75% of your emergency fund goal
+                </p>
                 <p className="text-xs text-foreground-muted">2 hours ago</p>
               </div>
             </DropdownMenuItem>
@@ -103,7 +112,9 @@ export function TopBar({ onNavigate }: TopBarProps) {
               <div className="w-2 h-2 rounded-full bg-warning mt-2 shrink-0" />
               <div className="space-y-1">
                 <p className="text-sm font-medium">Budget Alert</p>
-                <p className="text-xs text-foreground-subtle">You've spent 80% of your dining budget</p>
+                <p className="text-xs text-foreground-subtle">
+                  You've spent 80% of your dining budget
+                </p>
                 <p className="text-xs text-foreground-muted">1 day ago</p>
               </div>
             </DropdownMenuItem>
@@ -111,15 +122,15 @@ export function TopBar({ onNavigate }: TopBarProps) {
               <div className="w-2 h-2 rounded-full bg-primary mt-2 shrink-0" />
               <div className="space-y-1">
                 <p className="text-sm font-medium">New Reward</p>
-                <p className="text-xs text-foreground-subtle">You earned 50 WLY tokens for consistent saving</p>
+                <p className="text-xs text-foreground-subtle">
+                  You earned 50 STX tokens for consistent saving
+                </p>
                 <p className="text-xs text-foreground-muted">2 days ago</p>
               </div>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-
-
       </div>
     </header>
-  );
+  )
 }
