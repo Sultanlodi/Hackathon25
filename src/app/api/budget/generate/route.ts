@@ -1,28 +1,52 @@
 
+
+// src/app/api/budget/generate/route.ts
 import { NextResponse } from "next/server";
+import { plaidClient } from "@/lib/plaidClient";
+import { getPlaidAccessToken } from "@/lib/store";
 
-// Simple rules-based budget generator
-export async function POST(req: Request) {
+export async function POST() {
   try {
-    const body = await req.json();
-    const transactions = body.transactions || [];
+    const accessToken = await getPlaidAccessToken();
+    if (!accessToken) {
+      return NextResponse.json({ error: "No bank linked yet" }, { status: 400 });
+    }
 
-    // Sum amounts by category
-    const categoryTotals: Record<string, number> = {};
-    transactions.forEach((t: any) => {
-      categoryTotals[t.category] = (categoryTotals[t.category] || 0) + Math.abs(t.amount);
+    // Pull last 30 days of transactions
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 30);
+    const endDate = new Date();
+
+    const response = await plaidClient.transactionsGet({
+      access_token: accessToken,
+      start_date: startDate.toISOString().split("T")[0],
+      end_date: endDate.toISOString().split("T")[0],
     });
 
-    // Apply simple 50/30/20 budgeting rule
-    const income = 2000; // mock monthly income for demo
-    const budget = [
-      { name: "Needs (50%)", limit: income * 0.5, basis: "50/30/20 rule" },
-      { name: "Wants (30%)", limit: income * 0.3, basis: "50/30/20 rule" },
-      { name: "Savings (20%)", limit: income * 0.2, basis: "50/30/20 rule" },
-    ];
+    const transactions = response.data.transactions;
 
-    return NextResponse.json({ budget, categoryTotals });
-  } catch {
-    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    // Aggregate expenses by category
+    let totalSpent = 0;
+    const categoryTotals: Record<string, number> = {};
+
+    for (const tx of transactions) {
+      if (tx.amount > 0) { // expenses only
+        totalSpent += tx.amount;
+        const category = tx.personal_finance_category?.primary || "OTHER";
+        categoryTotals[category] = (categoryTotals[category] || 0) + tx.amount;
+      }
+    }
+
+    // Apply 50/30/20 rule based on spending
+    const budget = {
+      needs: totalSpent * 0.5,
+      wants: totalSpent * 0.3,
+      savings: totalSpent * 0.2,
+    };
+
+    return NextResponse.json({ totalSpent, budget, categoryTotals });
+  } catch (err: any) {
+    console.error("Plaid budget error:", err);
+    return NextResponse.json({ error: "Failed to generate budget" }, { status: 500 });
   }
 }
