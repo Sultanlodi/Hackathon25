@@ -1,43 +1,49 @@
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Avatar } from "../ui/avatar";
-import { Badge } from "../ui/badge";
-import { User, Mail, Edit2, Save, X, Camera, Shield } from "lucide-react";
-import { toast } from "sonner";
+import { useState } from 'react'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { Label } from '../ui/label'
+import { Avatar } from '../ui/avatar'
+import { Badge } from '../ui/badge'
+import { User, Mail, Edit2, Save, X, Camera, Shield } from 'lucide-react'
+import { toast } from 'sonner'
 
 export function ProfileSettings() {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false)
   const [profileData, setProfileData] = useState({
-    name: "Alex Thompson",
-    email: "alex.thompson@email.com",
-    joinDate: "September 2024",
-    accountStatus: "verified"
-  });
+    name: 'Alex Thompson',
+    email: 'alex.thompson@email.com',
+    joinDate: 'September 2024',
+    accountStatus: 'verified',
+  })
 
-  const [editData, setEditData] = useState(profileData);
+  const [editData, setEditData] = useState(profileData)
 
   const handleEdit = () => {
-    setIsEditing(true);
-    setEditData(profileData);
-  };
+    setIsEditing(true)
+    setEditData(profileData)
+  }
 
   const handleCancel = () => {
-    setIsEditing(false);
-    setEditData(profileData);
-  };
+    setIsEditing(false)
+    setEditData(profileData)
+  }
 
   const handleSave = () => {
-    setProfileData(editData);
-    setIsEditing(false);
-    toast.success("Profile updated successfully");
-  };
+    setProfileData(editData)
+    setIsEditing(false)
+    toast.success('Profile updated successfully')
+  }
 
   const handleInputChange = (field: string, value: string) => {
-    setEditData(prev => ({ ...prev, [field]: value }));
-  };
+    setEditData((prev) => ({ ...prev, [field]: value }))
+  }
 
   return (
     <Card variant="glass">
@@ -52,7 +58,7 @@ export function ProfileSettings() {
               </CardDescription>
             </div>
           </div>
-          
+
           {!isEditing ? (
             <Button variant="outline" size="sm" onClick={handleEdit}>
               <Edit2 className="w-4 h-4 mr-2" />
@@ -72,7 +78,7 @@ export function ProfileSettings() {
           )}
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-6">
         {/* Profile Avatar */}
         <div className="flex items-center gap-4">
@@ -90,20 +96,22 @@ export function ProfileSettings() {
               </Button>
             )}
           </div>
-          
+
           <div className="space-y-1">
             <h3 className="font-semibold">{profileData.name}</h3>
             <div className="flex items-center gap-2">
-              <Badge 
-                variant="secondary" 
+              <Badge
+                variant="secondary"
                 className={`text-xs ${
-                  profileData.accountStatus === "verified" 
-                    ? "bg-success/10 text-success border-success/20" 
-                    : "bg-warning/10 text-warning border-warning/20"
+                  profileData.accountStatus === 'verified'
+                    ? 'bg-success/10 text-success border-success/20'
+                    : 'bg-warning/10 text-warning border-warning/20'
                 }`}
               >
                 <Shield className="w-3 h-3 mr-1" />
-                {profileData.accountStatus === "verified" ? "Verified Account" : "Unverified"}
+                {profileData.accountStatus === 'verified'
+                  ? 'Verified Account'
+                  : 'Unverified'}
               </Badge>
             </div>
             <p className="text-sm text-foreground-muted">
@@ -159,7 +167,9 @@ export function ProfileSettings() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="text-center p-3 rounded-lg bg-background-subtle">
                 <div className="text-lg font-semibold text-primary">5</div>
-                <div className="text-xs text-foreground-muted">Goals Created</div>
+                <div className="text-xs text-foreground-muted">
+                  Goals Created
+                </div>
               </div>
               <div className="text-center p-3 rounded-lg bg-background-subtle">
                 <div className="text-lg font-semibold text-success">$2,250</div>
@@ -167,7 +177,7 @@ export function ProfileSettings() {
               </div>
               <div className="text-center p-3 rounded-lg bg-background-subtle">
                 <div className="text-lg font-semibold text-warning">125</div>
-                <div className="text-xs text-foreground-muted">WLY Tokens</div>
+                <div className="text-xs text-foreground-muted">STX Tokens</div>
               </div>
               <div className="text-center p-3 rounded-lg bg-background-subtle">
                 <div className="text-lg font-semibold text-primary">3</div>
@@ -182,15 +192,17 @@ export function ProfileSettings() {
           <div className="flex items-start gap-3">
             <Shield className="w-5 h-5 text-info mt-0.5 flex-shrink-0" />
             <div className="space-y-1">
-              <h4 className="text-sm font-medium text-info">Privacy Protected</h4>
+              <h4 className="text-sm font-medium text-info">
+                Privacy Protected
+              </h4>
               <p className="text-xs text-foreground-subtle">
-                Your personal information is encrypted and never shared with third parties. 
-                We use bank-grade security to protect your data.
+                Your personal information is encrypted and never shared with
+                third parties. We use bank-grade security to protect your data.
               </p>
             </div>
           </div>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

@@ -1,53 +1,53 @@
-import { Sparkles, Twitter, Github, Linkedin, Mail } from "lucide-react";
-import { Button } from "./ui/button";
-import { Separator } from "./ui/separator";
+import { Sparkles, Twitter, Github, Linkedin, Mail } from 'lucide-react'
+import { Button } from './ui/button'
+import { Separator } from './ui/separator'
 
 export function Footer() {
   const footerSections = [
     {
-      title: "Product",
+      title: 'Product',
       links: [
-        { name: "Features", href: "#features" },
-        { name: "How It Works", href: "#journey" },
-        { name: "Technology", href: "#tech" },
-        { name: "Pricing", href: "#pricing" }
-      ]
+        { name: 'Features', href: '#features' },
+        { name: 'How It Works', href: '#journey' },
+        { name: 'Technology', href: '#tech' },
+        { name: 'Pricing', href: '#pricing' },
+      ],
     },
     {
-      title: "Company", 
+      title: 'Company',
       links: [
-        { name: "About Us", href: "#about" },
-        { name: "Careers", href: "#careers" },
-        { name: "Blog", href: "#blog" },
-        { name: "Press", href: "#press" }
-      ]
+        { name: 'About Us', href: '#about' },
+        { name: 'Careers', href: '#careers' },
+        { name: 'Blog', href: '#blog' },
+        { name: 'Press', href: '#press' },
+      ],
     },
     {
-      title: "Resources",
+      title: 'Resources',
       links: [
-        { name: "Documentation", href: "#docs" },
-        { name: "API Reference", href: "#api" },
-        { name: "Support", href: "#support" },
-        { name: "Community", href: "#community" }
-      ]
+        { name: 'Documentation', href: '#docs' },
+        { name: 'API Reference', href: '#api' },
+        { name: 'Support', href: '#support' },
+        { name: 'Community', href: '#community' },
+      ],
     },
     {
-      title: "Legal",
+      title: 'Legal',
       links: [
-        { name: "Privacy Policy", href: "#privacy" },
-        { name: "Terms of Service", href: "#terms" },
-        { name: "Cookie Policy", href: "#cookies" },
-        { name: "Compliance", href: "#compliance" }
-      ]
-    }
-  ];
+        { name: 'Privacy Policy', href: '#privacy' },
+        { name: 'Terms of Service', href: '#terms' },
+        { name: 'Cookie Policy', href: '#cookies' },
+        { name: 'Compliance', href: '#compliance' },
+      ],
+    },
+  ]
 
   const socialLinks = [
-    { icon: Twitter, href: "#twitter", label: "Twitter" },
-    { icon: Github, href: "#github", label: "GitHub" },
-    { icon: Linkedin, href: "#linkedin", label: "LinkedIn" },
-    { icon: Mail, href: "#contact", label: "Contact" }
-  ];
+    { icon: Twitter, href: '#twitter', label: 'Twitter' },
+    { icon: Github, href: '#github', label: 'GitHub' },
+    { icon: Linkedin, href: '#linkedin', label: 'LinkedIn' },
+    { icon: Mail, href: '#contact', label: 'Contact' },
+  ]
 
   return (
     <footer className="bg-muted/30 border-t">
@@ -61,13 +61,15 @@ export function Footer() {
                 <Sparkles className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h3 className="text-lg">Wealthly</h3>
-                <p className="text-sm text-muted-foreground">AI + Blockchain Finance</p>
+                <h3 className="text-lg">Stacks</h3>
+                <p className="text-sm text-muted-foreground">
+                  AI + Blockchain Finance
+                </p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground max-w-sm">
-              Making finance transparent, personal, and rewarding for the next generation 
-              through AI-powered coaching and blockchain technology.
+              Making finance transparent, personal, and rewarding for the next
+              generation through AI-powered coaching and blockchain technology.
             </p>
             <div className="flex items-center gap-2">
               {socialLinks.map((social) => (
@@ -122,5 +124,5 @@ export function Footer() {
         </div>
       </div>
     </footer>
-  );
+  )
 }

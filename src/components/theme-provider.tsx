@@ -26,7 +26,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 export function ThemeProvider({
   children,
   defaultTheme = 'dark',
-  storageKey = 'wealthly-theme',
+  storageKey = 'stacks-theme',
   attribute = 'class',
   enableSystem = false,
   ...props

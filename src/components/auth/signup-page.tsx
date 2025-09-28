@@ -133,7 +133,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
 
                 <p className="text-xl text-foreground-subtle leading-relaxed max-w-lg">
                   Join thousands of users who are already transforming their
-                  financial habits with Wealthly's AI-powered platform.
+                  financial habits with Stacks' AI-powered platform.
                 </p>
               </div>
             </div>
@@ -141,7 +141,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
 
           {/* Benefits Features */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold">Why choose Wealthly?</h3>
+            <h3 className="text-lg font-semibold">Why choose Stacks?</h3>
             <div className="grid grid-cols-1 gap-4">
               {benefits.map((benefit, index) => (
                 <div
@@ -174,7 +174,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                   </div>
                   <div className="space-y-2">
                     <p className="text-sm leading-relaxed">
-                      "Wealthly's AI coach helped me build an emergency fund in
+                      "Stacks' AI coach helped me build an emergency fund in
                       just 6 months. The blockchain rewards made saving actually
                       fun!"
                     </p>
@@ -210,7 +210,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                 <Sparkles className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gradient">Wealthly</h1>
+                <h1 className="text-xl font-bold text-gradient">Stacks</h1>
                 <Badge variant="glass" className="text-xs mt-1">
                   AI + Blockchain
                 </Badge>
@@ -403,8 +403,8 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                       htmlFor="privacy"
                       className="text-sm leading-relaxed"
                     >
-                      I acknowledge that Wealthly is not meant for collecting
-                      PII or securing sensitive data beyond what's necessary for
+                      I acknowledge that Stacks is not meant for collecting PII
+                      or securing sensitive data beyond what's necessary for
                       financial coaching
                     </Label>
                   </div>

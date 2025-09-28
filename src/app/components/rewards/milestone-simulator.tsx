@@ -1,50 +1,51 @@
-import { useState } from "react";
-import { 
-  Target, 
-  Sparkles, 
+import { useState } from 'react'
+import {
+  Target,
+  Sparkles,
   Loader2,
   CheckCircle,
   Gift,
-  Info
-} from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
-import { toast } from "sonner";
+  Info,
+} from 'lucide-react'
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
+import { toast } from 'sonner'
 
 interface MilestoneSimulatorProps {
-  onMilestoneReached: () => void;
+  onMilestoneReached: () => void
 }
 
-export function MilestoneSimulator({ onMilestoneReached }: MilestoneSimulatorProps) {
-  const [isSimulating, setIsSimulating] = useState(false);
-  const [lastSimulated, setLastSimulated] = useState<Date | null>(null);
+export function MilestoneSimulator({
+  onMilestoneReached,
+}: MilestoneSimulatorProps) {
+  const [isSimulating, setIsSimulating] = useState(false)
+  const [lastSimulated, setLastSimulated] = useState<Date | null>(null)
 
   const handleMarkMilestone = async () => {
-    setIsSimulating(true);
-    
+    setIsSimulating(true)
+
     try {
       // Simulate blockchain transaction delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      onMilestoneReached();
-      setLastSimulated(new Date());
-      toast.success("Demo milestone completed! 50 SWT tokens earned.");
-      
+      await new Promise((resolve) => setTimeout(resolve, 2000))
+
+      onMilestoneReached()
+      setLastSimulated(new Date())
+      toast.success('Demo milestone completed! 50 STX tokens earned.')
     } catch (error) {
-      toast.error("Failed to simulate milestone");
+      toast.error('Failed to simulate milestone')
     } finally {
-      setIsSimulating(false);
+      setIsSimulating(false)
     }
-  };
+  }
 
   const formatLastSimulated = () => {
-    if (!lastSimulated) return null;
-    return lastSimulated.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
-    });
-  };
+    if (!lastSimulated) return null
+    return lastSimulated.toLocaleTimeString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+    })
+  }
 
   return (
     <Card variant="glass" className="border-dashed border-2 border-primary/20">
@@ -65,7 +66,7 @@ export function MilestoneSimulator({ onMilestoneReached }: MilestoneSimulatorPro
             <div>
               <p className="text-sm text-info font-medium mb-1">Demo Mode</p>
               <p className="text-xs text-foreground-subtle">
-                This simulates reaching a milestone and earning reward tokens. 
+                This simulates reaching a milestone and earning reward tokens.
                 In the real app, milestones are automatically detected.
               </p>
             </div>
@@ -79,9 +80,9 @@ export function MilestoneSimulator({ onMilestoneReached }: MilestoneSimulatorPro
               <Gift className="w-3 h-3 text-primary" />
               <span className="text-xs text-foreground-muted">Reward</span>
             </div>
-            <p className="font-semibold">50 SWT</p>
+            <p className="font-semibold">50 STX</p>
           </div>
-          
+
           <div className="text-center p-3 rounded-lg bg-background-subtle/50">
             <div className="flex items-center justify-center gap-1 mb-1">
               <Sparkles className="w-3 h-3 text-primary" />
@@ -96,13 +97,15 @@ export function MilestoneSimulator({ onMilestoneReached }: MilestoneSimulatorPro
           <div className="p-2 rounded-lg bg-success/5 border border-success/20">
             <div className="flex items-center justify-center gap-2 text-xs">
               <CheckCircle className="w-3 h-3 text-success" />
-              <span className="text-success">Last simulated at {formatLastSimulated()}</span>
+              <span className="text-success">
+                Last simulated at {formatLastSimulated()}
+              </span>
             </div>
           </div>
         )}
 
         {/* Action Button */}
-        <Button 
+        <Button
           onClick={handleMarkMilestone}
           disabled={isSimulating}
           className="w-full primary-gradient hover:primary-gradient-hover"
@@ -126,5 +129,5 @@ export function MilestoneSimulator({ onMilestoneReached }: MilestoneSimulatorPro
         </p>
       </CardContent>
     </Card>
-  );
+  )
 }

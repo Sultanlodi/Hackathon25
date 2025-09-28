@@ -31,7 +31,7 @@ export function MilestoneSimulator({
 
       onMilestoneReached()
       setLastSimulated(new Date())
-      toast.success('Demo milestone completed! 50 SWT tokens earned.')
+      toast.success('Demo milestone completed! 50 STX tokens earned.')
     } catch (error) {
       toast.error('Failed to simulate milestone')
     } finally {
@@ -80,7 +80,7 @@ export function MilestoneSimulator({
               <Gift className="w-3 h-3 text-primary" />
               <span className="text-xs text-foreground-muted">Reward</span>
             </div>
-            <p className="font-semibold">50 SWT</p>
+            <p className="font-semibold">50 STX</p>
           </div>
 
           <div className="text-center p-3 rounded-lg bg-background-subtle/50">

@@ -1,66 +1,70 @@
-import { 
-  LayoutDashboard, 
-  Link2, 
-  PieChart, 
-  Target, 
-  Gift, 
+import {
+  LayoutDashboard,
+  Link2,
+  PieChart,
+  Target,
+  Gift,
   Bot,
   Sparkles,
   LogOut,
   Settings,
-  ChevronLeft
-} from "lucide-react";
-import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
-import { Card } from "../ui/card";
-import { Separator } from "../ui/separator";
+  ChevronLeft,
+} from 'lucide-react'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
+import { Card } from '../ui/card'
+import { Separator } from '../ui/separator'
 
 interface SidebarProps {
-  activeSection: string;
-  onSectionChange: (section: string) => void;
-  onNavigate: (page: string) => void;
+  activeSection: string
+  onSectionChange: (section: string) => void
+  onNavigate: (page: string) => void
 }
 
 const navigationItems = [
   {
-    id: "dashboard",
-    label: "Dashboard", 
+    id: 'dashboard',
+    label: 'Dashboard',
     icon: LayoutDashboard,
-    badge: null
+    badge: null,
   },
   {
-    id: "link",
-    label: "Link Accounts",
+    id: 'link',
+    label: 'Link Accounts',
     icon: Link2,
-    badge: null
+    badge: null,
   },
   {
-    id: "budget",
-    label: "Budget",
+    id: 'budget',
+    label: 'Budget',
     icon: PieChart,
-    badge: null
+    badge: null,
   },
   {
-    id: "goals",
-    label: "Goals",
+    id: 'goals',
+    label: 'Goals',
     icon: Target,
-    badge: "3"
+    badge: '3',
   },
   {
-    id: "rewards",
-    label: "Rewards",
+    id: 'rewards',
+    label: 'Rewards',
     icon: Gift,
-    badge: "NEW"
+    badge: 'NEW',
   },
   {
-    id: "coach",
-    label: "AI Coach",
+    id: 'coach',
+    label: 'AI Coach',
     icon: Bot,
-    badge: null
-  }
-];
+    badge: null,
+  },
+]
 
-export function Sidebar({ activeSection, onSectionChange, onNavigate }: SidebarProps) {
+export function Sidebar({
+  activeSection,
+  onSectionChange,
+  onNavigate,
+}: SidebarProps) {
   return (
     <div className="w-64 h-screen bg-background-subtle border-r border-border-subtle flex flex-col">
       {/* Logo Section */}
@@ -70,64 +74,64 @@ export function Sidebar({ activeSection, onSectionChange, onNavigate }: SidebarP
             <Sparkles className="w-6 h-6 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gradient">Wealthly</h1>
+            <h1 className="text-xl font-bold text-gradient">Stacks</h1>
             <p className="text-xs text-foreground-subtle">AI Financial Coach</p>
           </div>
         </div>
       </div>
-      
+
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-2">
         {navigationItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = activeSection === item.id;
-          
+          const Icon = item.icon
+          const isActive = activeSection === item.id
+
           return (
             <Button
               key={item.id}
-              variant={isActive ? "default" : "ghost"}
+              variant={isActive ? 'default' : 'ghost'}
               className={`w-full justify-start h-12 ${
-                isActive 
-                  ? "primary-gradient text-primary-foreground shadow-md" 
-                  : "hover:bg-background-muted"
+                isActive
+                  ? 'primary-gradient text-primary-foreground shadow-md'
+                  : 'hover:bg-background-muted'
               }`}
               onClick={() => {
-                if (item.id === "dashboard") {
-                  onNavigate("dashboard");
-                } else if (item.id === "link") {
-                  onNavigate("bank-linking");
-                } else if (item.id === "budget") {
-                  onNavigate("budget");
-                } else if (item.id === "goals") {
-                  onNavigate("goals");
-                } else if (item.id === "rewards") {
-                  onNavigate("rewards");
-                } else if (item.id === "coach") {
-                  onNavigate("ai-coach");
-                } else if (item.id === "settings") {
-                  onNavigate("settings");
+                if (item.id === 'dashboard') {
+                  onNavigate('dashboard')
+                } else if (item.id === 'link') {
+                  onNavigate('bank-linking')
+                } else if (item.id === 'budget') {
+                  onNavigate('budget')
+                } else if (item.id === 'goals') {
+                  onNavigate('goals')
+                } else if (item.id === 'rewards') {
+                  onNavigate('rewards')
+                } else if (item.id === 'coach') {
+                  onNavigate('ai-coach')
+                } else if (item.id === 'settings') {
+                  onNavigate('settings')
                 } else {
-                  onSectionChange(item.id);
+                  onSectionChange(item.id)
                 }
               }}
             >
               <Icon className="w-5 h-5 mr-3" />
               <span className="flex-1 text-left">{item.label}</span>
               {item.badge && (
-                <Badge 
-                  variant={item.badge === "NEW" ? "success" : "secondary"} 
+                <Badge
+                  variant={item.badge === 'NEW' ? 'success' : 'secondary'}
                   className="ml-2 text-xs px-2 py-0.5"
                 >
                   {item.badge}
                 </Badge>
               )}
             </Button>
-          );
+          )
         })}
       </nav>
-      
+
       <Separator className="mx-4" />
-      
+
       {/* User Section */}
       <div className="p-4 space-y-3">
         <Card variant="glass" className="p-4">
@@ -137,31 +141,33 @@ export function Sidebar({ activeSection, onSectionChange, onNavigate }: SidebarP
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-medium text-sm truncate">John Doe</p>
-              <p className="text-xs text-foreground-subtle truncate">Premium Member</p>
+              <p className="text-xs text-foreground-subtle truncate">
+                Premium Member
+              </p>
             </div>
           </div>
         </Card>
-        
+
         <div className="space-y-1">
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             className="w-full justify-start h-10"
-            onClick={() => onNavigate("settings")}
+            onClick={() => onNavigate('settings')}
           >
             <Settings className="w-4 h-4 mr-3" />
             Settings
           </Button>
-          <Button 
-            variant="ghost" 
+          <Button
+            variant="ghost"
             className="w-full justify-start h-10 text-foreground-subtle hover:text-foreground"
-            onClick={() => onNavigate("landing")}
+            onClick={() => onNavigate('landing')}
           >
             <LogOut className="w-4 h-4 mr-3" />
             Sign Out
           </Button>
         </div>
       </div>
-      
+
       {/* Collapse Button */}
       <div className="p-4 border-t border-border-subtle">
         <Button variant="ghost" className="w-full justify-center h-10">
@@ -169,5 +175,5 @@ export function Sidebar({ activeSection, onSectionChange, onNavigate }: SidebarP
         </Button>
       </div>
     </div>
-  );
+  )
 }

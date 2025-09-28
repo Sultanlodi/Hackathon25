@@ -136,7 +136,7 @@ function EventCard({ event }: { event: RewardEvent }) {
                 <span className="text-lg font-bold text-success">
                   +{event.amount}
                 </span>
-                <span className="text-sm text-foreground-muted">SWT</span>
+                <span className="text-sm text-foreground-muted">STX</span>
               </div>
               <div className="text-xs text-foreground-muted">
                 ≈ ${(event.amount * 0.75).toFixed(2)}
@@ -232,11 +232,11 @@ export function RewardEventsTimeline({ events }: RewardEventsTimelineProps) {
           <div className="flex items-center gap-4 text-sm">
             <div className="text-right">
               <p className="text-foreground-muted">This Month</p>
-              <p className="font-semibold">{thisMonthTokens} SWT</p>
+              <p className="font-semibold">{thisMonthTokens} STX</p>
             </div>
             <div className="text-right">
               <p className="text-foreground-muted">Total Earned</p>
-              <p className="font-semibold">{totalTokensEarned} SWT</p>
+              <p className="font-semibold">{totalTokensEarned} STX</p>
             </div>
           </div>
         </div>

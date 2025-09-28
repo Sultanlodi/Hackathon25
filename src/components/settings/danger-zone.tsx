@@ -1,17 +1,17 @@
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Checkbox } from "../ui/checkbox";
-import { 
-  AlertTriangle, 
-  Trash2, 
-  Download, 
-  Shield,
-  UserX
-} from "lucide-react";
-import { toast } from "sonner";
+import { useState } from 'react'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
+import { Button } from '../ui/button'
+import { Input } from '../ui/input'
+import { Label } from '../ui/label'
+import { Checkbox } from '../ui/checkbox'
+import { AlertTriangle, Trash2, Download, Shield, UserX } from 'lucide-react'
+import { toast } from 'sonner'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -22,63 +22,63 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../ui/alert-dialog";
+} from '../ui/alert-dialog'
 
 interface DangerZoneProps {
-  onNavigate?: (page: string) => void;
+  onNavigate?: (page: string) => void
 }
 
 export function DangerZone({ onNavigate }: DangerZoneProps) {
-  const [confirmText, setConfirmText] = useState("");
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [isExporting, setIsExporting] = useState(false);
+  const [confirmText, setConfirmText] = useState('')
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [isExporting, setIsExporting] = useState(false)
   const [confirmations, setConfirmations] = useState({
     understand: false,
     backup: false,
-    permanent: false
-  });
+    permanent: false,
+  })
 
   const handleExportData = async () => {
-    setIsExporting(true);
-    
+    setIsExporting(true)
+
     // Simulate data export
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
+    await new Promise((resolve) => setTimeout(resolve, 2000))
+
     // In a real app, this would trigger a download
-    toast.success("Data exported successfully");
-    setIsExporting(false);
-  };
+    toast.success('Data exported successfully')
+    setIsExporting(false)
+  }
 
   const handleDeleteAccount = async () => {
-    setIsDeleting(true);
-    
+    setIsDeleting(true)
+
     // Simulate account deletion
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    setIsDeleting(false);
-    toast.success("Account has been permanently deleted");
-    
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+
+    setIsDeleting(false)
+    toast.success('Account has been permanently deleted')
+
     // Reset form and navigate to landing page
-    setConfirmText("");
+    setConfirmText('')
     setConfirmations({
       understand: false,
       backup: false,
-      permanent: false
-    });
-    
+      permanent: false,
+    })
+
     // Navigate back to landing page after account deletion
     if (onNavigate) {
       setTimeout(() => {
-        onNavigate("landing");
-      }, 1000);
+        onNavigate('landing')
+      }, 1000)
     }
-  };
+  }
 
-  const canDelete = 
-    confirmText === "DELETE MY ACCOUNT" && 
-    confirmations.understand && 
-    confirmations.backup && 
-    confirmations.permanent;
+  const canDelete =
+    confirmText === 'DELETE MY ACCOUNT' &&
+    confirmations.understand &&
+    confirmations.backup &&
+    confirmations.permanent
 
   return (
     <Card variant="glass" className="border-error/20">
@@ -93,7 +93,7 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
           </div>
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-6">
         {/* Export Data */}
         <div className="p-4 rounded-lg border border-border-subtle">
@@ -101,11 +101,12 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
             <div className="space-y-1">
               <h4 className="font-medium">Export Account Data</h4>
               <p className="text-sm text-foreground-subtle">
-                Download all your financial data, goals, transactions, and settings before making any permanent changes
+                Download all your financial data, goals, transactions, and
+                settings before making any permanent changes
               </p>
             </div>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               onClick={handleExportData}
               disabled={isExporting}
             >
@@ -128,9 +129,12 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
         <div className="p-4 rounded-lg border border-error/20 bg-error/5">
           <div className="space-y-4">
             <div>
-              <h4 className="font-medium text-error">Permanently Delete Account</h4>
+              <h4 className="font-medium text-error">
+                Permanently Delete Account
+              </h4>
               <p className="text-sm text-foreground-subtle">
-                Completely remove your Wealthly account and all associated data. This action is irreversible and cannot be undone.
+                Completely remove your Stacks account and all associated data.
+                This action is irreversible and cannot be undone.
               </p>
             </div>
 
@@ -153,37 +157,47 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
 
             <div className="space-y-3">
               <div className="flex items-start gap-2">
-                <Checkbox 
+                <Checkbox
                   id="understand"
                   checked={confirmations.understand}
-                  onCheckedChange={(checked) => 
-                    setConfirmations(prev => ({ ...prev, understand: checked as boolean }))
+                  onCheckedChange={(checked) =>
+                    setConfirmations((prev) => ({
+                      ...prev,
+                      understand: checked as boolean,
+                    }))
                   }
                 />
                 <Label htmlFor="understand" className="text-sm cursor-pointer">
-                  I understand that deleting my account will permanently remove all my data
+                  I understand that deleting my account will permanently remove
+                  all my data
                 </Label>
               </div>
-              
+
               <div className="flex items-start gap-2">
-                <Checkbox 
+                <Checkbox
                   id="backup"
                   checked={confirmations.backup}
-                  onCheckedChange={(checked) => 
-                    setConfirmations(prev => ({ ...prev, backup: checked as boolean }))
+                  onCheckedChange={(checked) =>
+                    setConfirmations((prev) => ({
+                      ...prev,
+                      backup: checked as boolean,
+                    }))
                   }
                 />
                 <Label htmlFor="backup" className="text-sm cursor-pointer">
                   I have exported or backed up any data I want to keep
                 </Label>
               </div>
-              
+
               <div className="flex items-start gap-2">
-                <Checkbox 
+                <Checkbox
                   id="permanent"
                   checked={confirmations.permanent}
-                  onCheckedChange={(checked) => 
-                    setConfirmations(prev => ({ ...prev, permanent: checked as boolean }))
+                  onCheckedChange={(checked) =>
+                    setConfirmations((prev) => ({
+                      ...prev,
+                      permanent: checked as boolean,
+                    }))
                   }
                 />
                 <Label htmlFor="permanent" className="text-sm cursor-pointer">
@@ -207,7 +221,7 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
 
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button 
+                <Button
                   variant="destructive"
                   disabled={!canDelete}
                   className="w-full"
@@ -224,9 +238,10 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
                   <AlertDialogDescription>
                     <div className="space-y-4">
                       <p>
-                        You are about to permanently delete your Wealthly account and all associated data.
+                        You are about to permanently delete your Stacks account
+                        and all associated data.
                       </p>
-                      
+
                       <div className="p-4 rounded-lg bg-error/10 border border-error/20">
                         <div className="flex items-start gap-2">
                           <AlertTriangle className="w-5 h-5 text-error mt-0.5 flex-shrink-0" />
@@ -235,24 +250,27 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
                               THIS ACTION IS IRREVERSIBLE
                             </p>
                             <p className="text-sm text-error">
-                              Once your account is deleted, it cannot be recovered by Wealthly, 
-                              our support team, or any third party. All your financial data, goals, 
-                              transactions, and settings will be permanently lost.
+                              Once your account is deleted, it cannot be
+                              recovered by Stacks, our support team, or any
+                              third party. All your financial data, goals,
+                              transactions, and settings will be permanently
+                              lost.
                             </p>
                           </div>
                         </div>
                       </div>
 
                       <p className="text-sm">
-                        If you're having issues with your account, consider contacting our support team 
-                        before taking this irreversible action.
+                        If you're having issues with your account, consider
+                        contacting our support team before taking this
+                        irreversible action.
                       </p>
                     </div>
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction 
+                  <AlertDialogAction
                     onClick={handleDeleteAccount}
                     disabled={isDeleting}
                     className="bg-error hover:bg-error/90 text-error-foreground"
@@ -280,17 +298,30 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
           <div className="flex items-start gap-3">
             <Shield className="w-5 h-5 text-info mt-0.5 flex-shrink-0" />
             <div className="space-y-2">
-              <h4 className="text-sm font-medium text-info">Data Security & Privacy</h4>
+              <h4 className="text-sm font-medium text-info">
+                Data Security & Privacy
+              </h4>
               <div className="text-xs text-foreground-subtle space-y-1">
-                <p>• All data deletion is processed securely and complies with privacy regulations</p>
-                <p>• Account deletion includes removal from all connected services and backups</p>
-                <p>• All actions are logged for security and compliance purposes</p>
-                <p>• Contact support if you need assistance before making permanent changes</p>
+                <p>
+                  • All data deletion is processed securely and complies with
+                  privacy regulations
+                </p>
+                <p>
+                  • Account deletion includes removal from all connected
+                  services and backups
+                </p>
+                <p>
+                  • All actions are logged for security and compliance purposes
+                </p>
+                <p>
+                  • Contact support if you need assistance before making
+                  permanent changes
+                </p>
               </div>
             </div>
           </div>
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }

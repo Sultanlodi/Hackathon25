@@ -4,7 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 
 export const metadata: Metadata = {
-  title: 'Wealthly',
+  title: 'Stacks',
   description: 'AI + on-chain rewards',
 }
 

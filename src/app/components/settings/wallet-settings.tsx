@@ -1,19 +1,25 @@
-import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
-import { 
-  Wallet, 
-  Copy, 
-  ExternalLink, 
-  CheckCircle, 
+import { useState } from 'react'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '../ui/card'
+import { Button } from '../ui/button'
+import { Badge } from '../ui/badge'
+import {
+  Wallet,
+  Copy,
+  ExternalLink,
+  CheckCircle,
   AlertCircle,
   Unlink,
   Shield,
   Activity,
-  Coins
-} from "lucide-react";
-import { toast } from "sonner";
+  Coins,
+} from 'lucide-react'
+import { toast } from 'sonner'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -24,44 +30,44 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "../ui/alert-dialog";
+} from '../ui/alert-dialog'
 
 export function WalletSettings() {
   const [walletData] = useState({
-    address: "0x742d35Cc6634C0532925a3b8D5F4F4C0eb345923",
-    network: "Polygon",
-    balance: "125.50",
-    symbol: "WLY",
+    address: '0x742d35Cc6634C0532925a3b8D5F4F4C0eb345923',
+    network: 'Polygon',
+    balance: '125.50',
+    symbol: 'STX',
     isConnected: true,
-    connectionDate: "Nov 15, 2024",
-    transactionCount: 8
-  });
+    connectionDate: 'Nov 15, 2024',
+    transactionCount: 8,
+  })
 
-  const [isDisconnecting, setIsDisconnecting] = useState(false);
+  const [isDisconnecting, setIsDisconnecting] = useState(false)
 
   const copyAddress = () => {
-    navigator.clipboard.writeText(walletData.address);
-    toast.success("Wallet address copied to clipboard");
-  };
+    navigator.clipboard.writeText(walletData.address)
+    toast.success('Wallet address copied to clipboard')
+  }
 
   const handleDisconnect = async () => {
-    setIsDisconnecting(true);
-    
+    setIsDisconnecting(true)
+
     // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsDisconnecting(false);
-    toast.success("Wallet disconnected successfully");
-  };
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+
+    setIsDisconnecting(false)
+    toast.success('Wallet disconnected successfully')
+  }
 
   const openBlockExplorer = () => {
     // In a real app, this would open the actual block explorer
-    toast.info("Opening Polygon block explorer...");
-  };
+    toast.info('Opening Polygon block explorer...')
+  }
 
   const formatAddress = (address: string) => {
-    return `${address.slice(0, 6)}...${address.slice(-4)}`;
-  };
+    return `${address.slice(0, 6)}...${address.slice(-4)}`
+  }
 
   return (
     <Card variant="glass">
@@ -72,20 +78,23 @@ export function WalletSettings() {
             <div>
               <CardTitle>Crypto Wallet</CardTitle>
               <CardDescription>
-                Manage your connected wallet for Wealthly Coin (WLY) rewards
+                Manage your connected wallet for Stacks Coin (STX) rewards
               </CardDescription>
             </div>
           </div>
-          
+
           {walletData.isConnected && (
-            <Badge variant="secondary" className="bg-success/10 text-success border-success/20">
+            <Badge
+              variant="secondary"
+              className="bg-success/10 text-success border-success/20"
+            >
               <CheckCircle className="w-3 h-3 mr-1" />
               Connected
             </Badge>
           )}
         </div>
       </CardHeader>
-      
+
       <CardContent className="space-y-6">
         {walletData.isConnected ? (
           <>
@@ -99,12 +108,16 @@ export function WalletSettings() {
                     <Button variant="ghost" size="sm" onClick={copyAddress}>
                       <Copy className="w-4 h-4" />
                     </Button>
-                    <Button variant="ghost" size="sm" onClick={openBlockExplorer}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={openBlockExplorer}
+                    >
                       <ExternalLink className="w-4 h-4" />
                     </Button>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <Wallet className="w-5 h-5 text-primary" />
@@ -114,7 +127,8 @@ export function WalletSettings() {
                       {walletData.address}
                     </p>
                     <p className="text-xs text-foreground-muted">
-                      {walletData.network} Network • Connected {walletData.connectionDate}
+                      {walletData.network} Network • Connected{' '}
+                      {walletData.connectionDate}
                     </p>
                   </div>
                 </div>
@@ -126,12 +140,14 @@ export function WalletSettings() {
                   <CardContent className="p-4 text-center">
                     <div className="flex items-center justify-center gap-2 mb-2">
                       <Coins className="w-5 h-5 text-warning" />
-                      <span className="font-medium">WLY Balance</span>
+                      <span className="font-medium">STX Balance</span>
                     </div>
                     <div className="text-2xl font-bold text-warning">
                       {walletData.balance}
                     </div>
-                    <p className="text-xs text-foreground-muted">Wealthly Coins</p>
+                    <p className="text-xs text-foreground-muted">
+                      Stacks Coins
+                    </p>
                   </CardContent>
                 </Card>
 
@@ -144,7 +160,9 @@ export function WalletSettings() {
                     <div className="text-2xl font-bold text-primary">
                       {walletData.transactionCount}
                     </div>
-                    <p className="text-xs text-foreground-muted">Total transactions</p>
+                    <p className="text-xs text-foreground-muted">
+                      Total transactions
+                    </p>
                   </CardContent>
                 </Card>
 
@@ -154,10 +172,10 @@ export function WalletSettings() {
                       <Shield className="w-5 h-5 text-success" />
                       <span className="font-medium">Security</span>
                     </div>
-                    <div className="text-2xl font-bold text-success">
-                      ✓
-                    </div>
-                    <p className="text-xs text-foreground-muted">Verified wallet</p>
+                    <div className="text-2xl font-bold text-success">✓</div>
+                    <p className="text-xs text-foreground-muted">
+                      Verified wallet
+                    </p>
                   </CardContent>
                 </Card>
               </div>
@@ -168,23 +186,47 @@ export function WalletSettings() {
               <h4 className="font-medium">Recent Activity</h4>
               <div className="space-y-2">
                 {[
-                  { type: "mint", amount: "+25.0", reason: "Emergency Fund Milestone", time: "2 hours ago" },
-                  { type: "mint", amount: "+15.0", reason: "Budget Goal Achieved", time: "1 day ago" },
-                  { type: "mint", amount: "+10.0", reason: "Weekly Savings Target", time: "3 days ago" }
+                  {
+                    type: 'mint',
+                    amount: '+25.0',
+                    reason: 'Emergency Fund Milestone',
+                    time: '2 hours ago',
+                  },
+                  {
+                    type: 'mint',
+                    amount: '+15.0',
+                    reason: 'Budget Goal Achieved',
+                    time: '1 day ago',
+                  },
+                  {
+                    type: 'mint',
+                    amount: '+10.0',
+                    reason: 'Weekly Savings Target',
+                    time: '3 days ago',
+                  },
                 ].map((activity, index) => (
-                  <div key={index} className="flex items-center justify-between p-3 rounded-lg bg-background-subtle">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between p-3 rounded-lg bg-background-subtle"
+                  >
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center">
                         <Coins className="w-4 h-4 text-success" />
                       </div>
                       <div>
                         <p className="text-sm font-medium">{activity.reason}</p>
-                        <p className="text-xs text-foreground-muted">{activity.time}</p>
+                        <p className="text-xs text-foreground-muted">
+                          {activity.time}
+                        </p>
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm font-medium text-success">{activity.amount} WLY</div>
-                      <div className="text-xs text-foreground-muted capitalize">{activity.type}</div>
+                      <div className="text-sm font-medium text-success">
+                        {activity.amount} STX
+                      </div>
+                      <div className="text-xs text-foreground-muted capitalize">
+                        {activity.type}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -200,11 +242,11 @@ export function WalletSettings() {
                     Manage your wallet connection and settings
                   </p>
                 </div>
-                
+
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
-                    <Button 
-                      variant="outline" 
+                    <Button
+                      variant="outline"
                       className="text-error hover:text-error border-error/20 hover:border-error/40"
                     >
                       <Unlink className="w-4 h-4 mr-2" />
@@ -215,15 +257,16 @@ export function WalletSettings() {
                     <AlertDialogHeader>
                       <AlertDialogTitle>Disconnect Wallet?</AlertDialogTitle>
                       <AlertDialogDescription>
-                        This will disconnect your wallet from Wealthly. You'll need to reconnect 
-                        to continue earning WLY tokens for achieving financial milestones.
-                        
+                        This will disconnect your wallet from Stacks. You'll
+                        need to reconnect to continue earning STX tokens for
+                        achieving financial milestones.
                         <div className="mt-4 p-3 rounded-lg bg-warning/10 border border-warning/20">
                           <div className="flex items-start gap-2">
                             <AlertCircle className="w-4 h-4 text-warning mt-0.5" />
                             <div className="text-sm">
-                              <strong>Important:</strong> Your existing WLY tokens will remain in your wallet, 
-                              but you won't earn new tokens until you reconnect.
+                              <strong>Important:</strong> Your existing STX
+                              tokens will remain in your wallet, but you won't
+                              earn new tokens until you reconnect.
                             </div>
                           </div>
                         </div>
@@ -231,12 +274,14 @@ export function WalletSettings() {
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                       <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction 
+                      <AlertDialogAction
                         onClick={handleDisconnect}
                         disabled={isDisconnecting}
                         className="bg-error hover:bg-error/90 text-error-foreground"
                       >
-                        {isDisconnecting ? "Disconnecting..." : "Disconnect Wallet"}
+                        {isDisconnecting
+                          ? 'Disconnecting...'
+                          : 'Disconnect Wallet'}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>
@@ -250,15 +295,15 @@ export function WalletSettings() {
             <div className="w-16 h-16 mx-auto rounded-full bg-background-subtle flex items-center justify-center">
               <Wallet className="w-8 h-8 text-foreground-muted" />
             </div>
-            
+
             <div className="space-y-2">
               <h4 className="font-medium">No Wallet Connected</h4>
               <p className="text-sm text-foreground-subtle max-w-md mx-auto">
-                Connect your crypto wallet to start earning Wealthly Coins (WLY) 
+                Connect your crypto wallet to start earning Stacks Coins (STX)
                 for achieving financial milestones and goals.
               </p>
             </div>
-            
+
             <Button className="primary-gradient hover:primary-gradient-hover">
               <Wallet className="w-4 h-4 mr-2" />
               Connect Wallet
@@ -275,7 +320,9 @@ export function WalletSettings() {
               <div className="text-xs text-foreground-subtle space-y-1">
                 <p>• We only request permission to view your wallet address</p>
                 <p>• Smart contracts are audited and open-source</p>
-                <p>• You maintain full control of your tokens and private keys</p>
+                <p>
+                  • You maintain full control of your tokens and private keys
+                </p>
                 <p>• All transactions are recorded on the Polygon blockchain</p>
               </div>
             </div>
@@ -283,5 +330,5 @@ export function WalletSettings() {
         </div>
       </CardContent>
     </Card>
-  );
+  )
 }
