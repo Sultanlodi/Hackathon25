@@ -1,13 +1,19 @@
-
-
 // src/app/api/budget/generate/route.ts
 import { NextResponse } from "next/server";
 import { plaidClient } from "@/lib/plaidClient";
-import { getPlaidAccessToken } from "@/lib/store";
+import { getAccessToken } from "@/lib/store";
 
-export async function POST() {
+// POST /api/budget/generate?userId=123
+export async function POST(req: Request) {
   try {
-    const accessToken = await getPlaidAccessToken();
+    const { searchParams } = new URL(req.url);
+    const userId = searchParams.get("userId");
+
+    if (!userId) {
+      return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+    }
+
+    const accessToken = getAccessToken(userId);
     if (!accessToken) {
       return NextResponse.json({ error: "No bank linked yet" }, { status: 400 });
     }

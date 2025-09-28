@@ -1,11 +1,20 @@
-import { NextResponse } from "next/server";
-// For demo we’ll store in memory (replace with DB in production)
-let accessToken: string | null = null;
 
-// POST /api/bank/link
-// Expects { public_token } from Plaid Link frontend or curl
+
+// src/app/api/bank/link/route.ts
+import { NextResponse } from "next/server";
+import { saveAccessToken, isLinked } from "@/lib/store";
+
+// POST /api/bank/link?userId=123
+// Expects { public_token } from frontend or curl
 export async function POST(req: Request) {
   try {
+    const { searchParams } = new URL(req.url);
+    const userId = searchParams.get("userId");
+
+    if (!userId) {
+      return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+    }
+
     const body = await req.json();
     const publicToken = body.public_token;
 
@@ -30,23 +39,31 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: data.error }, { status: 500 });
     }
 
-    // Save the access_token (for demo, in memory)
-    accessToken = data.access_token;
+    // Save access token for this user
+    saveAccessToken(userId, data.access_token);
 
     return NextResponse.json({
       message: "Bank linked successfully",
       item_id: data.item_id,
     });
   } catch (err) {
-    console.error("Bank link error", err);
+    console.error("Bank link error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
 
-// GET /api/bank/link → just to check if stored
-export async function GET() {
+// GET /api/bank/link?userId=123
+// Quick check if user has linked a bank
+export async function GET(req: Request) {
+  const { searchParams } = new URL(req.url);
+  const userId = searchParams.get("userId");
+
+  if (!userId) {
+    return NextResponse.json({ error: "Missing userId" }, { status: 400 });
+  }
+
   return NextResponse.json({
-    linked: !!accessToken,
-    accessToken: accessToken ? "***stored***" : null,
+    linked: isLinked(userId),
+    accessToken: isLinked(userId) ? "***stored***" : null,
   });
 }
