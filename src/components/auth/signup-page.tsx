@@ -1,16 +1,16 @@
-import { useState } from 'react'
-import { Button } from '../ui/button'
-import { Input } from '../ui/input'
-import { Label } from '../ui/label'
+import { useState } from "react";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from '../ui/card'
-import { Separator } from '../ui/separator'
-import { Badge } from '../ui/badge'
+} from "../ui/card";
+import { Separator } from "../ui/separator";
+import { Badge } from "../ui/badge";
 import {
   Sparkles,
   Mail,
@@ -23,85 +23,81 @@ import {
   Gift,
   Brain,
   Coins,
-  Zap,
-  CheckCircle,
-  Star,
-  Users,
-} from 'lucide-react'
-import { Checkbox } from '../ui/checkbox'
+} from "lucide-react";
+import { Checkbox } from "../ui/checkbox";
 
 interface SignupPageProps {
-  onNavigate: (page: string) => void
+  onNavigate: (page: string) => void;
 }
 
 export function SignupPage({ onNavigate }: SignupPageProps) {
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-  })
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: ""
+  });
   const [agreements, setAgreements] = useState({
     terms: false,
     privacy: false,
-    marketing: false,
-  })
-  const [isLoading, setIsLoading] = useState(false)
+    marketing: false
+  });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
-      [field]: value,
-    }))
-  }
+      [field]: value
+    }));
+  };
 
   const handleAgreementChange = (field: string, checked: boolean) => {
-    setAgreements((prev) => ({
+    setAgreements(prev => ({
       ...prev,
-      [field]: checked,
-    }))
-  }
+      [field]: checked
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-
+    e.preventDefault();
+    setIsLoading(true);
+    
     // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000))
-
-    setIsLoading(false)
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    
+    setIsLoading(false);
     // Here you would typically handle the signup logic
-    console.log('Signup submitted:', { formData, agreements })
-
+    console.log("Signup submitted:", { formData, agreements });
+    
     // Navigate to dashboard after successful signup
-    onNavigate('dashboard')
-  }
+    onNavigate("dashboard");
+  };
 
   const benefits = [
     {
       icon: Brain,
-      title: 'AI Financial Coach',
-      description: 'Get personalized financial advice 24/7',
+      title: "AI Financial Coach",
+      description: "Get personalized financial advice 24/7"
     },
     {
       icon: Shield,
-      title: 'Blockchain Security',
-      description: 'Your data protected by cutting-edge technology',
+      title: "Blockchain Security",
+      description: "Your data protected by cutting-edge technology"
     },
     {
       icon: Coins,
-      title: 'Tokenized Rewards',
-      description: 'Earn tokens for achieving financial goals',
+      title: "Tokenized Rewards",
+      description: "Earn tokens for achieving financial goals"
     },
     {
       icon: Gift,
-      title: 'Welcome Bonus',
-      description: 'Get 100 tokens when you complete setup',
-    },
-  ]
+      title: "Welcome Bonus",
+      description: "Get 100 tokens when you complete setup"
+    }
+  ];
 
   return (
     <div className="min-h-screen bg-background flex">
@@ -116,7 +112,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
           <div className="space-y-8">
             <Button
               variant="ghost"
-              onClick={() => onNavigate('landing')}
+              onClick={() => onNavigate("landing")}
               className="self-start p-0 h-auto hover:bg-transparent text-foreground-subtle hover:text-foreground"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
@@ -133,7 +129,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
 
                 <p className="text-xl text-foreground-subtle leading-relaxed max-w-lg">
                   Join thousands of users who are already transforming their
-                  financial habits with Wealthly's AI-powered platform.
+                  financial habits with Stacks' AI-powered platform.
                 </p>
               </div>
             </div>
@@ -141,7 +137,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
 
           {/* Benefits Features */}
           <div className="space-y-6">
-            <h3 className="text-lg font-semibold">Why choose Wealthly?</h3>
+            <h3 className="text-lg font-semibold">Why choose Stacks?</h3>
             <div className="grid grid-cols-1 gap-4">
               {benefits.map((benefit, index) => (
                 <div
@@ -174,7 +170,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                   </div>
                   <div className="space-y-2">
                     <p className="text-sm leading-relaxed">
-                      "Wealthly's AI coach helped me build an emergency fund in
+                      "Stacks' AI coach helped me build an emergency fund in
                       just 6 months. The blockchain rewards made saving actually
                       fun!"
                     </p>
@@ -199,7 +195,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
           <div className="lg:hidden text-center space-y-4">
             <Button
               variant="ghost"
-              onClick={() => onNavigate('landing')}
+              onClick={() => onNavigate("landing")}
               className="self-start p-0 h-auto hover:bg-transparent mb-6"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
@@ -210,7 +206,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                 <Sparkles className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-gradient">Wealthly</h1>
+                <h1 className="text-xl font-bold text-gradient">Stacks</h1>
                 <Badge variant="glass" className="text-xs mt-1">
                   AI + Blockchain
                 </Badge>
@@ -247,7 +243,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                         placeholder="John"
                         value={formData.firstName}
                         onChange={(e) =>
-                          handleInputChange('firstName', e.target.value)
+                          handleInputChange("firstName", e.target.value)
                         }
                         className="pl-10 h-12 text-base bg-input border-input-border focus:border-ring"
                         required
@@ -264,7 +260,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                       placeholder="Doe"
                       value={formData.lastName}
                       onChange={(e) =>
-                        handleInputChange('lastName', e.target.value)
+                        handleInputChange("lastName", e.target.value)
                       }
                       className="h-12 text-base bg-input border-input-border focus:border-ring"
                       required
@@ -284,7 +280,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                       placeholder="john@example.com"
                       value={formData.email}
                       onChange={(e) =>
-                        handleInputChange('email', e.target.value)
+                        handleInputChange("email", e.target.value)
                       }
                       className="pl-10 h-12 text-base bg-input border-input-border focus:border-ring"
                       required
@@ -300,11 +296,11 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-foreground-subtle" />
                     <Input
                       id="password"
-                      type={showPassword ? 'text' : 'password'}
+                      type={showPassword ? "text" : "password"}
                       placeholder="Create a strong password"
                       value={formData.password}
                       onChange={(e) =>
-                        handleInputChange('password', e.target.value)
+                        handleInputChange("password", e.target.value)
                       }
                       className="pl-10 pr-10 h-12 text-base bg-input border-input-border focus:border-ring"
                       required
@@ -336,11 +332,11 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-foreground-subtle" />
                     <Input
                       id="confirmPassword"
-                      type={showConfirmPassword ? 'text' : 'password'}
+                      type={showConfirmPassword ? "text" : "password"}
                       placeholder="Confirm your password"
                       value={formData.confirmPassword}
                       onChange={(e) =>
-                        handleInputChange('confirmPassword', e.target.value)
+                        handleInputChange("confirmPassword", e.target.value)
                       }
                       className="pl-10 pr-10 h-12 text-base bg-input border-input-border focus:border-ring"
                       required
@@ -369,19 +365,19 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                       id="terms"
                       checked={agreements.terms}
                       onCheckedChange={(checked: boolean) =>
-                        handleAgreementChange('terms', checked)
+                        handleAgreementChange("terms", checked)
                       }
                       className="mt-1"
                     />
                     <Label htmlFor="terms" className="text-sm leading-relaxed">
-                      I agree to the{' '}
+                      I agree to the{" "}
                       <Button
                         variant="link"
                         className="px-0 text-sm h-auto font-medium text-primary"
                       >
                         Terms of Service
-                      </Button>{' '}
-                      and{' '}
+                      </Button>{" "}
+                      and{" "}
                       <Button
                         variant="link"
                         className="px-0 text-sm h-auto font-medium text-primary"
@@ -395,7 +391,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                       id="privacy"
                       checked={agreements.privacy}
                       onCheckedChange={(checked: boolean) =>
-                        handleAgreementChange('privacy', checked)
+                        handleAgreementChange("privacy", checked)
                       }
                       className="mt-1"
                     />
@@ -403,7 +399,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                       htmlFor="privacy"
                       className="text-sm leading-relaxed"
                     >
-                      I acknowledge that Wealthly is not meant for collecting
+                      I acknowledge that Stacks is not meant for collecting
                       PII or securing sensitive data beyond what's necessary for
                       financial coaching
                     </Label>
@@ -413,7 +409,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                       id="marketing"
                       checked={agreements.marketing}
                       onCheckedChange={(checked: boolean) =>
-                        handleAgreementChange('marketing', checked)
+                        handleAgreementChange("marketing", checked)
                       }
                       className="mt-1"
                     />
@@ -440,7 +436,7 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
                       Creating account...
                     </>
                   ) : (
-                    'Create account'
+                    "Create account"
                   )}
                 </Button>
               </form>
@@ -498,12 +494,12 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
 
               <div className="text-center text-sm">
                 <span className="text-foreground-subtle">
-                  Already have an account?{' '}
+                  Already have an account?{" "}
                 </span>
                 <Button
                   variant="link"
                   className="px-0 text-sm font-medium text-primary hover:text-primary"
-                  onClick={() => onNavigate('login')}
+                  onClick={() => onNavigate("login")}
                 >
                   Sign in
                 </Button>
@@ -513,5 +509,5 @@ export function SignupPage({ onNavigate }: SignupPageProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -69,7 +69,6 @@ export function FeaturesSection() {
             Everything You Need to Build <span className="text-gradient">Wealth</span>
           </h2>
           <p className="text-xl text-foreground-subtle max-w-3xl mx-auto">
-            Wealthly combines cutting-edge AI with blockchain technology to deliver 
             a comprehensive financial education and wealth-building platform.
           </p>
         </div>

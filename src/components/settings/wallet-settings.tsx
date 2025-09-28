@@ -72,7 +72,7 @@ export function WalletSettings() {
             <div>
               <CardTitle>Crypto Wallet</CardTitle>
               <CardDescription>
-                Manage your connected wallet for Wealthly Coin (WLY) rewards
+                Manage your connected wallet for Stacks Coin (STX) rewards
               </CardDescription>
             </div>
           </div>
@@ -126,12 +126,12 @@ export function WalletSettings() {
                   <CardContent className="p-4 text-center">
                     <div className="flex items-center justify-center gap-2 mb-2">
                       <Coins className="w-5 h-5 text-warning" />
-                      <span className="font-medium">WLY Balance</span>
+                      <span className="font-medium">STX Balance</span>
                     </div>
                     <div className="text-2xl font-bold text-warning">
                       {walletData.balance}
                     </div>
-                    <p className="text-xs text-foreground-muted">Wealthly Coins</p>
+                    <p className="text-xs text-foreground-muted">Stacks Coins</p>
                   </CardContent>
                 </Card>
 
@@ -183,7 +183,7 @@ export function WalletSettings() {
                       </div>
                     </div>
                     <div className="text-right">
-                      <div className="text-sm font-medium text-success">{activity.amount} WLY</div>
+                      <div className="text-sm font-medium text-success">{activity.amount} STX</div>
                       <div className="text-xs text-foreground-muted capitalize">{activity.type}</div>
                     </div>
                   </div>
@@ -215,14 +215,14 @@ export function WalletSettings() {
                     <AlertDialogHeader>
                       <AlertDialogTitle>Disconnect Wallet?</AlertDialogTitle>
                       <AlertDialogDescription>
-                        This will disconnect your wallet from Wealthly. You'll need to reconnect 
-                        to continue earning WLY tokens for achieving financial milestones.
+                        This will disconnect your wallet from Stacks. You'll need to reconnect 
+                        to continue earning STX tokens for achieving financial milestones.
                         
                         <div className="mt-4 p-3 rounded-lg bg-warning/10 border border-warning/20">
                           <div className="flex items-start gap-2">
                             <AlertCircle className="w-4 h-4 text-warning mt-0.5" />
                             <div className="text-sm">
-                              <strong>Important:</strong> Your existing WLY tokens will remain in your wallet, 
+                              <strong>Important:</strong> Your existing STX tokens will remain in your wallet, 
                               but you won't earn new tokens until you reconnect.
                             </div>
                           </div>
@@ -254,7 +254,7 @@ export function WalletSettings() {
             <div className="space-y-2">
               <h4 className="font-medium">No Wallet Connected</h4>
               <p className="text-sm text-foreground-subtle max-w-md mx-auto">
-                Connect your crypto wallet to start earning Wealthly Coins (WLY) 
+                Connect your crypto wallet to start earning Stacks Coins (STX) 
                 for achieving financial milestones and goals.
               </p>
             </div>

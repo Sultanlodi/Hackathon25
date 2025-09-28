@@ -44,9 +44,9 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
               <Sparkles className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-xl">Wealthly</h1>
+              <h1 className="text-xl">Stacks</h1>
               <Badge variant="secondary" className="text-xs">
-                AI + Blockchain
+                AI-Powered Finance
               </Badge>
             </div>
           </button>

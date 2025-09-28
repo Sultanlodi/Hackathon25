@@ -23,7 +23,7 @@ export function CTASection({ onNavigate }: CTASectionProps) {
               <span className="text-accent">Financial Future?</span>
             </h2>
             <p className="text-lg text-primary-foreground/80 max-w-2xl mx-auto">
-              Join thousands of users who are already building wealth with Wealthly's 
+              Join thousands of users who are already building wealth with Stacks' 
               AI-powered coaching and blockchain-secured transparency.
             </p>
           </div>
@@ -66,7 +66,7 @@ export function CTASection({ onNavigate }: CTASectionProps) {
           {/* Final Message */}
           <div className="pt-8 border-t border-white/20">
             <p className="text-lg text-primary-foreground/80">
-              <span className="text-accent">Wealthly:</span> Making finance transparent, personal, and rewarding.
+              <span className="text-accent">Stacks:</span> Making finance transparent, personal, and rewarding.
               <br />
               Let's build financial literacy and wealth for the next generation.
             </p>

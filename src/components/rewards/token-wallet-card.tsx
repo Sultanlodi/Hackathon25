@@ -66,14 +66,14 @@ export function TokenWalletCard({ balance, address }: TokenWalletCardProps) {
             <div className="p-2 rounded-lg bg-primary/10">
               <Wallet className="w-5 h-5 text-primary" />
             </div>
-            Wealthly Token
+            Stacks Token
           </CardTitle>
           <Badge
             variant="secondary"
             className="bg-success/10 text-success border-success/20"
           >
             <Coins className="w-3 h-3 mr-1" />
-            SWT
+            STX
           </Badge>
         </div>
       </CardHeader>
@@ -104,7 +104,7 @@ export function TokenWalletCard({ balance, address }: TokenWalletCardProps) {
               <span className="text-3xl font-bold">
                 {formatBalance(balance)}
               </span>
-              <span className="text-sm text-foreground-muted">SWT</span>
+              <span className="text-sm text-foreground-muted">STX</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="text-sm text-foreground-subtle">
@@ -151,7 +151,7 @@ export function TokenWalletCard({ balance, address }: TokenWalletCardProps) {
               <span className="font-semibold">
                 {formatBalance(monthlyEarnings)}
               </span>
-              <span className="text-xs text-foreground-muted">SWT</span>
+              <span className="text-xs text-foreground-muted">STX</span>
             </div>
             <p className="text-xs text-success">+23% vs last month</p>
           </div>
@@ -162,7 +162,7 @@ export function TokenWalletCard({ balance, address }: TokenWalletCardProps) {
               <span className="font-semibold">
                 {formatBalance(totalEarnings)}
               </span>
-              <span className="text-xs text-foreground-muted">SWT</span>
+              <span className="text-xs text-foreground-muted">STX</span>
             </div>
             <p className="text-xs text-foreground-subtle">Since joining</p>
           </div>
@@ -189,7 +189,7 @@ export function TokenWalletCard({ balance, address }: TokenWalletCardProps) {
             </span>
           </div>
           <p className="text-xs text-foreground-subtle">
-            Use SWT tokens to unlock premium features, access exclusive
+            Use STX tokens to unlock premium features, access exclusive
             financial courses, or exchange for real rewards and discounts.
           </p>
         </div>

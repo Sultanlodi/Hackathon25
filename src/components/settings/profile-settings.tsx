@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
@@ -40,7 +46,7 @@ export function ProfileSettings() {
   };
 
   return (
-    <Card variant="glass">
+    <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -167,7 +173,7 @@ export function ProfileSettings() {
               </div>
               <div className="text-center p-3 rounded-lg bg-background-subtle">
                 <div className="text-lg font-semibold text-warning">125</div>
-                <div className="text-xs text-foreground-muted">WLY Tokens</div>
+                <div className="text-xs text-foreground-muted">STX Tokens</div>
               </div>
               <div className="text-center p-3 rounded-lg bg-background-subtle">
                 <div className="text-lg font-semibold text-primary">3</div>

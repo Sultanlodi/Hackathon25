@@ -61,7 +61,7 @@ export function Footer() {
                 <Sparkles className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h3 className="text-lg">Wealthly</h3>
+                <h3 className="text-lg">Stacks</h3>
                 <p className="text-sm text-muted-foreground">AI + Blockchain Finance</p>
               </div>
             </div>
@@ -111,7 +111,7 @@ export function Footer() {
         {/* Bottom Footer */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex items-center gap-6 text-sm text-muted-foreground">
-            <p>© 2025 Wealthly. All rights reserved.</p>
+            <p>© 2025 Stacks. All rights reserved.</p>
             <p>Built with AI and secured by blockchain</p>
           </div>
           <div className="flex items-center gap-4 text-sm text-muted-foreground">

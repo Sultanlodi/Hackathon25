@@ -1,85 +1,77 @@
-'use client'
-import { createContext, useContext, useEffect, useState } from 'react'
+"use client";
 
-type Theme = 'dark' | 'light' | 'system'
+import { createContext, useContext, useEffect, useState } from "react";
+
+type Theme = "dark" | "light";
 
 type ThemeProviderProps = {
-  children: React.ReactNode
-  defaultTheme?: Theme
-  storageKey?: string
-  attribute?: string
-  enableSystem?: boolean
-}
+  children: React.ReactNode;
+  defaultTheme?: Theme;
+  storageKey?: string;
+};
 
 type ThemeProviderState = {
-  theme: Theme
-  setTheme: (theme: Theme) => void
-}
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+};
 
 const initialState: ThemeProviderState = {
-  theme: 'dark',
+  theme: "dark",
   setTheme: () => null,
-}
+};
 
-const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
+const ThemeProviderContext = createContext<ThemeProviderState>(initialState);
 
 export function ThemeProvider({
   children,
-  defaultTheme = 'dark',
-  storageKey = 'wealthly-theme',
-  attribute = 'class',
-  enableSystem = false,
+  defaultTheme = "dark",
+  storageKey = "stacks-theme",
   ...props
 }: ThemeProviderProps) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme)
-
-  useEffect(() => {
-    // Initialize theme from localStorage on client side
-    const storedTheme = localStorage.getItem(storageKey) as Theme
-    if (storedTheme) {
-      setTheme(storedTheme)
+  const [theme, setTheme] = useState<Theme>(() => {
+    try {
+      return (localStorage.getItem(storageKey) as Theme) || defaultTheme;
+    } catch {
+      return defaultTheme;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []) // Only run on mount
+  });
 
   useEffect(() => {
-    const root = window.document.documentElement
+    const root = window.document.documentElement;
 
-    root.classList.remove('light', 'dark')
+    root.classList.remove("light", "dark");
 
-    if (theme === 'system') {
-      const systemTheme = window.matchMedia('(prefers-color-scheme: dark)')
-        .matches
-        ? 'dark'
-        : 'light'
-      root.classList.add(systemTheme)
-    } else if (theme === 'light') {
-      root.classList.add('light')
+    if (theme === "light") {
+      root.classList.add("light");
     } else {
-      root.classList.add('dark')
+      root.classList.add("dark");
     }
-  }, [theme])
+  }, [theme]);
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme)
-      setTheme(theme)
+    setTheme: (newTheme: Theme) => {
+      try {
+        localStorage.setItem(storageKey, newTheme);
+      } catch {
+        // Handle cases where localStorage is not available
+      }
+      setTheme(newTheme);
     },
-  }
+  };
 
   return (
     <ThemeProviderContext.Provider {...props} value={value}>
       {children}
     </ThemeProviderContext.Provider>
-  )
+  );
 }
 
 export const useTheme = () => {
-  const context = useContext(ThemeProviderContext)
+  const context = useContext(ThemeProviderContext);
 
   if (context === undefined)
-    throw new Error('useTheme must be used within a ThemeProvider')
+    throw new Error("useTheme must be used within a ThemeProvider");
 
-  return context
-}
+  return context;
+};

@@ -70,7 +70,7 @@ export function Sidebar({ activeSection, onSectionChange, onNavigate }: SidebarP
             <Sparkles className="w-6 h-6 text-primary-foreground" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gradient">Wealthly</h1>
+            <h1 className="text-xl font-bold text-gradient">Stacks</h1>
             <p className="text-xs text-foreground-subtle">AI Financial Coach</p>
           </div>
         </div>

@@ -1,7 +1,5 @@
 import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { ImageWithFallback } from "./figma/ImageWithFallback";
-import { Sparkles, Brain, Shield } from "lucide-react";
+import Image from "next/image";
 
 interface HeroSectionProps {
   onNavigate: (page: string) => void;
@@ -9,60 +7,41 @@ interface HeroSectionProps {
 
 export function HeroSection({ onNavigate }: HeroSectionProps) {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/20 pt-16 pb-20">
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <Badge variant="secondary" className="w-fit">
-                <Sparkles className="w-4 h-4 mr-2" />
-                AI + Blockchain Revolution
-              </Badge>
-              <h1 className="text-4xl lg:text-6xl tracking-tight">
-                Smart <span className="text-primary">Wealth</span>
+    <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
+      <div className="container px-4 md:px-6">
+        <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
+          <div className="flex flex-col justify-center space-y-4">
+            <div className="space-y-2">
+              <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">
+                The Future of Finance is Here
               </h1>
-              <p className="text-xl text-muted-foreground max-w-lg">
-                Your AI-powered financial coach with blockchain transparency. 
-                Build wealth, earn rewards, and master money management with gamified learning.
+              <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                Stacks is a revolutionary platform that combines the power of AI
+                and blockchain to help you achieve your financial goals.
               </p>
             </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button size="lg" className="text-lg px-8" onClick={() => onNavigate("signup")}>
-                Start Building Wealth
+            <div className="flex flex-col gap-2 min-[400px]:flex-row">
+              <Button
+                className="inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                onClick={() => onNavigate("signup")}
+              >
+                Get Started
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8">
+              <Button
+                className="inline-flex h-10 items-center justify-center rounded-md border border-input bg-background px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                variant="outline"
+              >
                 Learn More
               </Button>
             </div>
-
-            <div className="flex items-center gap-8 pt-4">
-              <div className="flex items-center gap-2">
-                <Brain className="w-5 h-5 text-primary" />
-                <span className="text-sm">AI Coach</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Shield className="w-5 h-5 text-primary" />
-                <span className="text-sm">Blockchain Secured</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-primary" />
-                <span className="text-sm">Tokenized Rewards</span>
-              </div>
-            </div>
           </div>
-
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-accent/20 rounded-3xl blur-lg"></div>
-            <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
-              <ImageWithFallback
-                src="https://images.unsplash.com/photo-1758519292135-2af0ad50f552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaW5hbmNpYWwlMjBhcHAlMjBzbWFydHBob25lJTIwbW9kZXJufGVufDF8fHx8MTc1ODk1MDcxM3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Wealthly Financial App"
-                className="w-full h-[500px] object-cover"
-              />
-            </div>
-          </div>
+          <Image
+            alt="Hero"
+            className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square"
+            height="550"
+            src="/placeholder.svg"
+            width="550"
+          />
         </div>
       </div>
     </section>

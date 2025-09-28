@@ -157,7 +157,7 @@ export function Rewards({ onNavigate }: RewardsProps) {
           <div className="p-6 space-y-6">
             {/* Header */}
             <div className="space-y-2">
-              <h1 className="text-3xl font-bold">Wealthly Rewards</h1>
+              <h1 className="text-3xl font-bold">Stacks Rewards</h1>
               <p className="text-foreground-subtle">
                 Earn tokens for achieving financial milestones and building good habits.
               </p>

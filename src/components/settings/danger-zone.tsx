@@ -130,7 +130,7 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
             <div>
               <h4 className="font-medium text-error">Permanently Delete Account</h4>
               <p className="text-sm text-foreground-subtle">
-                Completely remove your Wealthly account and all associated data. This action is irreversible and cannot be undone.
+                Completely remove your Stacks account and all associated data. This action is irreversible and cannot be undone.
               </p>
             </div>
 
@@ -224,7 +224,7 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
                   <AlertDialogDescription>
                     <div className="space-y-4">
                       <p>
-                        You are about to permanently delete your Wealthly account and all associated data.
+                        You are about to permanently delete your Stacks account and all associated data.
                       </p>
                       
                       <div className="p-4 rounded-lg bg-error/10 border border-error/20">
@@ -235,7 +235,7 @@ export function DangerZone({ onNavigate }: DangerZoneProps) {
                               THIS ACTION IS IRREVERSIBLE
                             </p>
                             <p className="text-sm text-error">
-                              Once your account is deleted, it cannot be recovered by Wealthly, 
+                              Once your account is deleted, it cannot be recovered by Stacks, 
                               our support team, or any third party. All your financial data, goals, 
                               transactions, and settings will be permanently lost.
                             </p>

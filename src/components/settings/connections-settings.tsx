@@ -221,7 +221,7 @@ export function ConnectionsSettings() {
               <div className="text-xs text-foreground-subtle space-y-1">
                 <p>• All connections are secured with 256-bit encryption</p>
                 <p>• We use Plaid's read-only access - we never store your login credentials</p>
-                <p>• Your bank data is only used to provide Wealthly features</p>
+                <p>• Your bank data is only used to provide Stacks features</p>
                 <p>• You can disconnect any account at any time</p>
               </div>
             </div>

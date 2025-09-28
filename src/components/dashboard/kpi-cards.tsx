@@ -65,7 +65,7 @@ const kpiData: KPIData[] = [
     trend: 'up',
     icon: Coins,
     color: 'accent',
-    subtitle: 'WLY tokens',
+        subtitle: "STX tokens",
   },
 ]
 
