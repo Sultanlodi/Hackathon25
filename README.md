@@ -1,4 +1,4 @@
-# Hackathon25
+# ShellHacks Hackathon25
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with pnpm and TypeScript.
 
