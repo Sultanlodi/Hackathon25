@@ -6,6 +6,19 @@ module.exports = {
     './src/pages/**/*.{ts,tsx,js,jsx,mdx}',
     './src/components/**/*.{ts,tsx,js,jsx,mdx}',
   ],
+  safelist: [
+    // Ensure gradient and dynamic classes aren't purged
+    {
+      pattern:
+        /(bg|text|border)-(slate|neutral|zinc|gray|primary|secondary|accent)-(50|100|200|300|400|500|600|700|800|900)/,
+    },
+    'text-gradient',
+    'bg-gradient-to-r',
+    'bg-gradient-to-br',
+    'from-primary',
+    'to-accent',
+    'backdrop-blur-sm',
+  ],
   theme: {
     extend: {
       colors: {

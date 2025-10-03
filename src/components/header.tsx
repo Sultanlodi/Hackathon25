@@ -32,20 +32,20 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
   }
 
   return (
-    <header className="fixed top-0 w-full bg-background/95 backdrop-blur-sm border-b border-border z-50">
+    <header className="fixed top-0 w-full bg-background/80 backdrop-blur-sm border-b border-white/10 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <button
             onClick={() => onNavigate('landing')}
             className="flex items-center gap-3 hover:opacity-80 transition-opacity"
           >
-            <div className="p-2 rounded-lg bg-primary">
+            <div className="p-2 rounded-lg primary-gradient">
               <Sparkles className="w-6 h-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-xl">Stacks</h1>
-              <Badge variant="secondary" className="text-xs">
+              <span className="text-xl font-bold">Stacks</span>
+              <Badge variant="glass" className="text-xs backdrop-blur-lg">
                 AI + Blockchain
               </Badge>
             </div>
@@ -67,7 +67,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
           )}
 
           {/* Desktop CTA */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2">
             <Button
               variant="ghost"
               size="sm"
@@ -87,7 +87,10 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
                 <Menu className="w-5 h-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-64">
+            <SheetContent
+              side="right"
+              className="w-64 bg-background/90 backdrop-blur-xl"
+            >
               <div className="flex flex-col gap-6 pt-6">
                 {currentPage === 'landing' && (
                   <nav className="flex flex-col gap-4">
@@ -105,7 +108,7 @@ export function Header({ onNavigate, currentPage }: HeaderProps) {
                     ))}
                   </nav>
                 )}
-                <div className="flex flex-col gap-3 pt-4 border-t">
+                <div className="flex flex-col gap-3 pt-4 border-t border-border">
                   <Button
                     variant="ghost"
                     onClick={() => {
