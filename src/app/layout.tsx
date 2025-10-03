@@ -6,6 +6,7 @@ import { ThemeProvider } from '@/components/theme-provider'
 
 const inter = Inter({
   subsets: ['latin'],
+  variable: '--font-inter',
   display: 'swap',
   weight: ['300', '400', '500', '600', '700', '800'],
 })
@@ -21,8 +22,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className="dark" suppressHydrationWarning>
-      <body className={inter.className}>
+    <html
+      lang="en"
+      className={`dark ${inter.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="font-sans">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"

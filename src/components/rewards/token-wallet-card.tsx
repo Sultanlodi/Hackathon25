@@ -56,9 +56,19 @@ export function TokenWalletCard({ balance, address }: TokenWalletCardProps) {
   }
 
   return (
-    <Card variant="glass" className="relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-purple-500/10" />
+    <Card variant="glass" className="relative overflow-hidden group">
+      {/* Background gradient - Grey to Purple blend with shine */}
+      <div className="absolute inset-0 bg-gradient-to-br from-zinc-800/90 via-zinc-700/70 to-purple-600/40" />
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-purple-500/20 to-purple-400/30" />
+      {/* Shine effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] via-transparent to-transparent" />
+      {/* Animated shimmer */}
+      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+      {/* Color transition line */}
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-zinc-700/0 via-purple-500/60 to-purple-600/0 opacity-40"
+        style={{ clipPath: 'polygon(0 40%, 100% 60%, 100% 65%, 0 45%)' }}
+      />
 
       <CardHeader className="relative">
         <div className="flex items-center justify-between">

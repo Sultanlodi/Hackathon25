@@ -112,11 +112,17 @@ export function LandingPage({ onNavigate }: LandingPageProps) {
             </div>
 
             {/* Right Column - Dashboard Mock */}
-            <div className="relative animate-slide-up">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-3xl" />
+            <div className="relative group animate-slide-up">
+              <div className="absolute -inset-8 bg-white/10 rounded-3xl blur-[80px] opacity-40 group-hover:opacity-50 transition-opacity duration-500" />
+              <div className="absolute -inset-6 bg-white/8 rounded-3xl blur-[60px] opacity-45 animate-pulse-slow" />
+              <div className="absolute -inset-4 bg-gradient-to-br from-white/6 via-white/3 to-white/6 rounded-3xl blur-[40px] opacity-50" />
               <Card
                 variant="glass"
                 className="relative overflow-hidden shadow-2xl"
+                style={{
+                  boxShadow:
+                    '0 0 60px rgba(255, 255, 255, 0.15), 0 0 100px rgba(255, 255, 255, 0.1), 0 0 140px rgba(255, 255, 255, 0.05)',
+                }}
               >
                 <CardHeader className="pb-4">
                   <div className="flex items-center justify-between">
